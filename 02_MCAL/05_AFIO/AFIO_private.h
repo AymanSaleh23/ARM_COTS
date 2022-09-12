@@ -7,15 +7,18 @@
 /*	Header File Guard
 	if file is not defined 
  */
-#ifndef NVIC_CONFIG_H_
-#define NVIC_CONFIG_H_
+#ifndef AFIO_PRIVATE_H_
+#define AFIO_PRIVATE_H_
 
-/*	Options:
-		NVIC_GROUP_4_SUB_0
-		NVIC_GROUP_3_SUB_1
-		NVIC_GROUP_2_SUB_2
-		NVIC_GROUP_1_SUB_3
-		NVIC_GROUP_0_SUB_4
- */
-#define MNVIC_GROUP_SUB_DIST	NVIC_GROUP_2_SUB_2
+#define AFIO_BASE_ADDRESS	(0x40010000)
+
+typedef struct {
+	volatile	u32 EVCR;
+	volatile	u32 MAPR;
+	volatile	u32 EXTICR [4];
+	volatile	u32 MAPR2;
+}AFIO_t;
+
+#define AFIO ((volatile AFIO_t *) (AFIO_BASE_ADDRESS))
+
 #endif
