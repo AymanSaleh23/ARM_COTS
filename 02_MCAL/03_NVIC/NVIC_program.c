@@ -11,13 +11,10 @@
 #include "NVIC_private.h"
 #include "NVIC_config.h"
 
+#include "SCB_interface.h"
 void MNVIC_voidInit(void){
 
-#define SCB_BASE_ADDRESS	0xE000ED00
-#define SCB_AIRCR_KEY		0x05FA
-#define SCB_AIRCR			*((volatile u32*) (SCB_BASE_ADDRESS	+ 0x0C))
-
-	SCB_AIRCR = MNVIC_GROUP_SUB_DIST;
+	MSCB_voidInit();
 }
 void MNVIC_voidEnableInterrupt (u8 Copy_u8IntNumber){
 	/*	Validata Interrupt Number	*/
@@ -109,6 +106,6 @@ u8   MNVIC_u8GetActiveFlag		(u8 Copy_u8IntNumber){
 	return Local_u8Result;
 }
 
-void MVIC_voidSetPriority	(u8 Copy_u8PeripheralIdx, u8 Copy_u8Priority){
-	NVIC_IPR[Copy_u8PeripheralIdx] = (Copy_u8Priority);
+void MNVIC_voidSetPriority	(u8 Copy_u8PeripheralIdx, u8 Copy_u8Priority){
+	NVIC_IPR[Copy_u8PeripheralIdx] = (Copy_u8Priority<<5);
 }
