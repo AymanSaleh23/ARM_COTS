@@ -1,7 +1,7 @@
 /****************************************************/
 /*	Author	:Ayman Saleh							*/
-/*	Date	:12 SEP 2022 							*/
-/*	Version	:V01		 							*/
+/*	Date	:14 SEP 2022 							*/
+/*	Version	:V02		 							*/
 /****************************************************/
 
 /*	Header File Guard
@@ -13,12 +13,12 @@
 #define EXTI_BASE_ADDRESS	(0x40010400)
 
 typedef struct {
-	volatile u32 IMR;
-	volatile u32 EMR;
-	volatile u32 RTSR;
-	volatile u32 FTSR;
-	volatile u32 SWIER;
-	volatile u32 PR;
+	volatile u32 IMR;		/*	Set interrupt Mask	*/
+	volatile u32 EMR;		/*	Event Mask			*/
+	volatile u32 RTSR;		/*	Set Rising Edge	as Sensitivity Mode		*/
+	volatile u32 FTSR;		/*	Set Falling Edge as Sensitivity Mode	*/
+	volatile u32 SWIER;		/*	Software Interrupt Trigger	*/
+	volatile u32 PR;		/*	Pending	*/
 }EXTI_t;
 
 /*	Define Pointer to Struct	*/
@@ -41,8 +41,14 @@ typedef struct {
 #define LINE14	14
 #define LINE15	15
 
+/*	Sensitivity Choices	*/
 #define RISING		0
 #define	FALLING		1
 #define	ON_CHANGE	2
+/*	Callback Default	*/
+#define NULL		0
+
+#define ENABLE	1
+#define DISABLE	2
 
 #endif
