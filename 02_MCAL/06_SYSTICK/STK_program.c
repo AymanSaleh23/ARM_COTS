@@ -39,6 +39,10 @@ void MSTK_voidSetBusyWait	(u32 Copy_u32Ticks){
 	while ( (GET_BIT(STK_CTRL,STK_CTRL_COUNTFLAG) == 0) );
 }
 void MSTK_voidSetIntervalSingle	(u32 Copy_u32Ticks, void (*ptr) (void) ){
+
+	STK_LOAD= 0;
+	STK_VAL = 0;
+
 	/*	Put total ticks in Load register*/
 	STK_LOAD = Copy_u32Ticks;
 	/*	Enable STK to start*/
