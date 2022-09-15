@@ -41,12 +41,12 @@ typedef struct {
 #define LINE14	14
 #define LINE15	15
 
-/*	Sensitivity Choices	*/
-#define RISING		0
-#define	FALLING		1
-#define	ON_CHANGE	2
 /*	Callback Default	*/
 #define NULL		0
+
+#define RISING     	1
+#define FALLING     2
+#define ON_CHANGE   3
 
 #define ENABLE	1
 #define DISABLE	2
