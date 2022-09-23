@@ -20,8 +20,10 @@ void (*SPI_callBack[3])(u16)= {NULL_PTR};
 void MSPI1_voidInit (void){
 	/*	SPI1_STATE	Start	*/
 #if 	SPI1_STATE	==	ENABLE
-
+	/*0b0000 1111 1111 1111*/
 	SPI1_REGISTER->CR1 	&= RESET_NOT_STD_CONFIG;
+
+	SET_BIT(SPI1_REGISTER->CR1, SPI_CR1_SSI);
 	/*	SPI1_BAUDRATE	Start	*/
 #if		SPI1_BAUDRATE	>=	BR_DIV_BY_2 && 	SPI1_BAUDRATE	<= BR_DIV_BY_256
 	SPI1_REGISTER->CR1 &= SPI_CR1_BR_MASK;
@@ -74,6 +76,9 @@ void MSPI1_voidInit (void){
 
 	/*	SPI1_MODE	Start	*/
 #if		SPI1_MODE	==	MASTER
+	/*	Enable SSM -Physical NSS pin will be disconnected from SPI-	*/
+	SET_BIT(SPI1_REGISTER->CR1, SPI_CR1_SSM);
+	/*	Put NSS to High by Software using SSI	*/
 	SET_BIT(SPI1_REGISTER->CR1, SPI_CR1_MSTR);
 #elif	SPI1_MODE	==	SLAVE
 	CLR_BIT(SPI1_REGISTER->CR1, SPI_CR1_MSTR);
@@ -94,8 +99,10 @@ void MSPI1_voidInit (void){
 void MSPI2_voidInit (void){
 	/*	SPI2_STATE	Start	*/
 #if 	SPI2_STATE	==	ENABLE
-
+	/*0b0000 1111 1111 1111*/
 	SPI2_REGISTER->CR1 	&= RESET_NOT_STD_CONFIG;
+
+	SET_BIT(SPI2_REGISTER->CR1, SPI_CR1_SSI);
 	/*	SPI2_BAUDRATE	Start	*/
 #if		SPI2_BAUDRATE	>=	BR_DIV_BY_2 && 	SPI2_BAUDRATE	<= BR_DIV_BY_256
 	SPI2_REGISTER->CR1 &= SPI_CR1_BR_MASK;
@@ -148,6 +155,9 @@ void MSPI2_voidInit (void){
 
 	/*	SPI2_MODE	Start	*/
 #if		SPI2_MODE	==	MASTER
+	/*	Enable SSM -Physical NSS pin will be disconnected from SPI-	*/
+	SET_BIT(SPI2_REGISTER->CR1, SPI_CR1_SSM);
+	/*	Put NSS to High by Software using SSI	*/
 	SET_BIT(SPI2_REGISTER->CR1, SPI_CR1_MSTR);
 #elif	SPI2_MODE	==	SLAVE
 	CLR_BIT(SPI2_REGISTER->CR1, SPI_CR1_MSTR);
@@ -168,8 +178,10 @@ void MSPI2_voidInit (void){
 void MSPI3_voidInit (void){
 	/*	SPI3_STATE	Start	*/
 #if 	SPI3_STATE	==	ENABLE
-
+	/*0b0000 1111 1111 1111*/
 	SPI3_REGISTER->CR1 	&= RESET_NOT_STD_CONFIG;
+
+	SET_BIT(SPI3_REGISTER->CR1, SPI_CR1_SSI);
 	/*	SPI3_BAUDRATE	Start	*/
 #if		SPI3_BAUDRATE	>=	BR_DIV_BY_2 && 	SPI3_BAUDRATE	<= BR_DIV_BY_256
 	SPI3_REGISTER->CR1 &= SPI_CR1_BR_MASK;
@@ -222,6 +234,9 @@ void MSPI3_voidInit (void){
 
 	/*	SPI3_MODE	Start	*/
 #if		SPI3_MODE	==	MASTER
+	/*	Enable SSM -Physical NSS pin will be disconnected from SPI-	*/
+	SET_BIT(SPI3_REGISTER->CR1, SPI_CR1_SSM);
+	/*	Put NSS to High by Software using SSI	*/
 	SET_BIT(SPI3_REGISTER->CR1, SPI_CR1_MSTR);
 #elif	SPI3_MODE	==	SLAVE
 	CLR_BIT(SPI3_REGISTER->CR1, SPI_CR1_MSTR);
@@ -243,7 +258,7 @@ void MSPI3_voidInit (void){
 void MSPI1_voidSendReceiveSynch(u16 Copy_u16DataToSend, u16 * Copy_u16DataToReceive){
 	/*	Enable Slave	*/
 	DIO_voidSetPinValue(SPI1_SLAVE_PIN 	, GPIO_PIN_LOW);
-	SPI1_REGISTER->DR = Copy_u16DataToSend;
+	SPI1_REGISTER->DR = (u8)Copy_u16DataToSend;
 	/*	Wait for the Busy flag	*/
 	while (GET_BIT(SPI1_REGISTER->SR, SPI_SR_BSY) == 1);
 	/*	Return to the received data	*/

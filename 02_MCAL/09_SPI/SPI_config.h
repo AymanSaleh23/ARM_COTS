@@ -55,13 +55,13 @@
  * 		BR_DIV_BY_182
  * 		BR_DIV_BY_256
  */
-#define SPI1_BAUDRATE	BR_DIV_BY_64
+#define SPI1_BAUDRATE	BR_DIV_BY_2
 
 /*	Options:
  * 		LSB_FIRST
  * 		MSB_FIRST
  */
-#define SPI1_FIRST_BIT	LSB_FIRST
+#define SPI1_FIRST_BIT	MSB_FIRST
 
 /*	Options:
  * 		FRAME_8_BIT
@@ -128,7 +128,7 @@
  * 		ENABLE
  * 		DISABLE
  */
-#define SPI3_STATE	ENABLE
+#define SPI3_STATE	DISABLE
 
 
 /*	Write in Pairs GPIO_PORTx, GPIO_PINx

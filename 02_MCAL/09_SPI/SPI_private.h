@@ -92,14 +92,14 @@ typedef struct{
 
 #define SPI_CR1_BR_MASK			0xFFC7
 
-#define BR_DIV_BY_2		0
-#define BR_DIV_BY_4		1
-#define BR_DIV_BY_8   	2
-#define BR_DIV_BY_16  	3
-#define BR_DIV_BY_32  	4
-#define BR_DIV_BY_64  	5
-#define BR_DIV_BY_182 	6
-#define BR_DIV_BY_256 	7
+#define BR_DIV_BY_2		0b000
+#define BR_DIV_BY_4		0b001
+#define BR_DIV_BY_8   	0b010
+#define BR_DIV_BY_16  	0b011
+#define BR_DIV_BY_32  	0b100
+#define BR_DIV_BY_64  	0b101
+#define BR_DIV_BY_182 	0b110
+#define BR_DIV_BY_256 	0b111
 
 #define LSB_FIRST		1
 #define MSB_FIRST		0
@@ -107,6 +107,6 @@ typedef struct{
 #define FRAME_8_BIT 			0
 #define FRAME_16_BIT			1
 
-#define RESET_NOT_STD_CONFIG	0x0FFF
+#define RESET_NOT_STD_CONFIG	0x00FF
 #define NULL_PTR		(void*)0
 #endif
